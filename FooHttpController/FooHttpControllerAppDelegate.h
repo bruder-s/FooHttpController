@@ -9,10 +9,21 @@
 #import <Cocoa/Cocoa.h>
 
 @interface FooHttpControllerAppDelegate : NSObject <NSApplicationDelegate> {
+
+IBOutlet NSTextField *lblLog;
+    
 @private
     NSWindow *window;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+
+- (IBAction)play:(id)sender;
+- (IBAction)pauseOrPlay:(id)sender;
+- (IBAction)stop:(id)sender;
+- (IBAction)previous:(id)sender;
+- (IBAction)next:(id)sender;
+
+- (void)setLog:(NSString *)message;
 
 @end
