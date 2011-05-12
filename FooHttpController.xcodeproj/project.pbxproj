@@ -1,0 +1,456 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C522000137BADE300B836A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C521FFF137BADE300B836A8 /* Cocoa.framework */; };
+		0C52200A137BADE300B836A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C522008137BADE300B836A8 /* InfoPlist.strings */; };
+		0C52200D137BADE300B836A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52200C137BADE300B836A8 /* main.m */; };
+		0C522010137BADE300B836A8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0C52200E137BADE300B836A8 /* Credits.rtf */; };
+		0C522013137BADE300B836A8 /* FooHttpControllerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C522012137BADE300B836A8 /* FooHttpControllerAppDelegate.m */; };
+		0C522016137BADE400B836A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C522014137BADE400B836A8 /* MainMenu.xib */; };
+		0C52201D137BADE400B836A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C521FFF137BADE300B836A8 /* Cocoa.framework */; };
+		0C522025137BADE400B836A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C522023137BADE400B836A8 /* InfoPlist.strings */; };
+		0C522028137BADE400B836A8 /* FooHttpControllerTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 0C522027137BADE400B836A8 /* FooHttpControllerTests.h */; };
+		0C52202A137BADE400B836A8 /* FooHttpControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C522029137BADE400B836A8 /* FooHttpControllerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0C52201E137BADE400B836A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C521FF2137BADE300B836A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C521FFA137BADE300B836A8;
+			remoteInfo = FooHttpController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C521FFB137BADE300B836A8 /* FooHttpController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FooHttpController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C521FFF137BADE300B836A8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		0C522002137BADE300B836A8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		0C522003137BADE300B836A8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0C522004137BADE300B836A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C522007137BADE300B836A8 /* FooHttpController-Info.plist */ = {isa = PBXFileReference; path = "FooHttpController-Info.plist"; sourceTree = "<group>"; };
+		0C522009137BADE300B836A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C52200B137BADE300B836A8 /* FooHttpController-Prefix.pch */ = {isa = PBXFileReference; path = "FooHttpController-Prefix.pch"; sourceTree = "<group>"; };
+		0C52200C137BADE300B836A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0C52200F137BADE300B836A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		0C522011137BADE300B836A8 /* FooHttpControllerAppDelegate.h */ = {isa = PBXFileReference; path = FooHttpControllerAppDelegate.h; sourceTree = "<group>"; };
+		0C522012137BADE300B836A8 /* FooHttpControllerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FooHttpControllerAppDelegate.m; sourceTree = "<group>"; };
+		0C522015137BADE400B836A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0C52201C137BADE400B836A8 /* FooHttpControllerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FooHttpControllerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C522022137BADE400B836A8 /* FooHttpControllerTests-Info.plist */ = {isa = PBXFileReference; path = "FooHttpControllerTests-Info.plist"; sourceTree = "<group>"; };
+		0C522024137BADE400B836A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C522026137BADE400B836A8 /* FooHttpControllerTests-Prefix.pch */ = {isa = PBXFileReference; path = "FooHttpControllerTests-Prefix.pch"; sourceTree = "<group>"; };
+		0C522027137BADE400B836A8 /* FooHttpControllerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FooHttpControllerTests.h; sourceTree = "<group>"; };
+		0C522029137BADE400B836A8 /* FooHttpControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FooHttpControllerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0C521FF8137BADE300B836A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C522000137BADE300B836A8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C522018137BADE400B836A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C52201D137BADE400B836A8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C521FF0137BADE300B836A8 = {
+			isa = PBXGroup;
+			children = (
+				0C522005137BADE300B836A8 /* FooHttpController */,
+				0C522020137BADE400B836A8 /* FooHttpControllerTests */,
+				0C521FFE137BADE300B836A8 /* Frameworks */,
+				0C521FFC137BADE300B836A8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0C521FFC137BADE300B836A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C521FFB137BADE300B836A8 /* FooHttpController.app */,
+				0C52201C137BADE400B836A8 /* FooHttpControllerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0C521FFE137BADE300B836A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C521FFF137BADE300B836A8 /* Cocoa.framework */,
+				0C522001137BADE300B836A8 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0C522001137BADE300B836A8 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C522002137BADE300B836A8 /* AppKit.framework */,
+				0C522003137BADE300B836A8 /* CoreData.framework */,
+				0C522004137BADE300B836A8 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		0C522005137BADE300B836A8 /* FooHttpController */ = {
+			isa = PBXGroup;
+			children = (
+				0C522011137BADE300B836A8 /* FooHttpControllerAppDelegate.h */,
+				0C522012137BADE300B836A8 /* FooHttpControllerAppDelegate.m */,
+				0C522014137BADE400B836A8 /* MainMenu.xib */,
+				0C522006137BADE300B836A8 /* Supporting Files */,
+			);
+			path = FooHttpController;
+			sourceTree = "<group>";
+		};
+		0C522006137BADE300B836A8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C522007137BADE300B836A8 /* FooHttpController-Info.plist */,
+				0C522008137BADE300B836A8 /* InfoPlist.strings */,
+				0C52200B137BADE300B836A8 /* FooHttpController-Prefix.pch */,
+				0C52200C137BADE300B836A8 /* main.m */,
+				0C52200E137BADE300B836A8 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C522020137BADE400B836A8 /* FooHttpControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				0C522027137BADE400B836A8 /* FooHttpControllerTests.h */,
+				0C522029137BADE400B836A8 /* FooHttpControllerTests.m */,
+				0C522021137BADE400B836A8 /* Supporting Files */,
+			);
+			path = FooHttpControllerTests;
+			sourceTree = "<group>";
+		};
+		0C522021137BADE400B836A8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C522022137BADE400B836A8 /* FooHttpControllerTests-Info.plist */,
+				0C522023137BADE400B836A8 /* InfoPlist.strings */,
+				0C522026137BADE400B836A8 /* FooHttpControllerTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C521FFA137BADE300B836A8 /* FooHttpController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C52202D137BADE400B836A8 /* Build configuration list for PBXNativeTarget "FooHttpController" */;
+			buildPhases = (
+				0C521FF7137BADE300B836A8 /* Sources */,
+				0C521FF8137BADE300B836A8 /* Frameworks */,
+				0C521FF9137BADE300B836A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FooHttpController;
+			productName = FooHttpController;
+			productReference = 0C521FFB137BADE300B836A8 /* FooHttpController.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0C52201B137BADE400B836A8 /* FooHttpControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C522030137BADE400B836A8 /* Build configuration list for PBXNativeTarget "FooHttpControllerTests" */;
+			buildPhases = (
+				0C522017137BADE400B836A8 /* Sources */,
+				0C522018137BADE400B836A8 /* Frameworks */,
+				0C522019137BADE400B836A8 /* Resources */,
+				0C52201A137BADE400B836A8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0C52201F137BADE400B836A8 /* PBXTargetDependency */,
+			);
+			name = FooHttpControllerTests;
+			productName = FooHttpControllerTests;
+			productReference = 0C52201C137BADE400B836A8 /* FooHttpControllerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C521FF2137BADE300B836A8 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 0C521FF5137BADE300B836A8 /* Build configuration list for PBXProject "FooHttpController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0C521FF0137BADE300B836A8;
+			productRefGroup = 0C521FFC137BADE300B836A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C521FFA137BADE300B836A8 /* FooHttpController */,
+				0C52201B137BADE400B836A8 /* FooHttpControllerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C521FF9137BADE300B836A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C52200A137BADE300B836A8 /* InfoPlist.strings in Resources */,
+				0C522010137BADE300B836A8 /* Credits.rtf in Resources */,
+				0C522016137BADE400B836A8 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C522019137BADE400B836A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C522025137BADE400B836A8 /* InfoPlist.strings in Resources */,
+				0C522028137BADE400B836A8 /* FooHttpControllerTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C52201A137BADE400B836A8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0C521FF7137BADE300B836A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C52200D137BADE300B836A8 /* main.m in Sources */,
+				0C522013137BADE300B836A8 /* FooHttpControllerAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C522017137BADE400B836A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C52202A137BADE400B836A8 /* FooHttpControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0C52201F137BADE400B836A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C521FFA137BADE300B836A8 /* FooHttpController */;
+			targetProxy = 0C52201E137BADE400B836A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0C522008137BADE300B836A8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C522009137BADE300B836A8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0C52200E137BADE300B836A8 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C52200F137BADE300B836A8 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		0C522014137BADE400B836A8 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C522015137BADE400B836A8 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		0C522023137BADE400B836A8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C522024137BADE400B836A8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0C52202B137BADE400B836A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0C52202C137BADE400B836A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0C52202E137BADE400B836A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FooHttpController/FooHttpController-Prefix.pch";
+				INFOPLIST_FILE = "FooHttpController/FooHttpController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0C52202F137BADE400B836A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FooHttpController/FooHttpController-Prefix.pch";
+				INFOPLIST_FILE = "FooHttpController/FooHttpController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0C522031137BADE400B836A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FooHttpController.app/Contents/MacOS/FooHttpController";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FooHttpControllerTests/FooHttpControllerTests-Prefix.pch";
+				INFOPLIST_FILE = "FooHttpControllerTests/FooHttpControllerTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0C522032137BADE400B836A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FooHttpController.app/Contents/MacOS/FooHttpController";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FooHttpControllerTests/FooHttpControllerTests-Prefix.pch";
+				INFOPLIST_FILE = "FooHttpControllerTests/FooHttpControllerTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0C521FF5137BADE300B836A8 /* Build configuration list for PBXProject "FooHttpController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C52202B137BADE400B836A8 /* Debug */,
+				0C52202C137BADE400B836A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C52202D137BADE400B836A8 /* Build configuration list for PBXNativeTarget "FooHttpController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C52202E137BADE400B836A8 /* Debug */,
+				0C52202F137BADE400B836A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0C522030137BADE400B836A8 /* Build configuration list for PBXNativeTarget "FooHttpControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C522031137BADE400B836A8 /* Debug */,
+				0C522032137BADE400B836A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0C521FF2137BADE300B836A8 /* Project object */;
+}
