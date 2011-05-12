@@ -7,6 +7,15 @@
 //
 
 #import "FooHttpControllerAppDelegate.h"
+//begin global hotkeys
+#import <Carbon/Carbon.h>
+//end global hotkeys
+
+#define HOTKEY_PLAY     1
+#define HOTKEY_PAUSE    2
+#define HOTKEY_STOP     3
+#define HOTKEY_PREVIOUS 4
+#define HOTKEY_NEXT     5
 
 @implementation FooHttpControllerAppDelegate
 
@@ -34,10 +43,10 @@
     [self performAction:@"Start"];
 }
 
-- (IBAction)pauseOrPlay:(id)sender
+- (IBAction)playOrPause:(id)sender
 {
     [self setLog:@"Received playOrPause event"];
-    [self performAction:@"Start"];
+    [self performAction:@"PlayOrPause"];
 
 }
 
@@ -103,35 +112,25 @@
 }
   
 //begin system tray
-- (void)startTimer:(id)sender {
-    
-    _timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
-
-    [_timer fire];
-  }
-  
-- (void)stopTimer:(id)sender {
-    _timeInterval = [_startDate timeIntervalSinceNow];
-    [_timer invalidate];
-    [_timer release];
-  }
-  
-- (IBAction)updateTime:(id)sender {
-    
-    //refresh time count in NSStatusBar
-    //[_systemTray setTitle:[NSString stringWithFormat:@"%d:%d:%d", hours, minutes, seconds]];
-    [_systemTray setTitle:[NSString stringWithFormat:@"%d:%d:%d", 2, 3, 4]];
-  }
 
 - (void) createMyTrayBar  {
   NSZone *menuZone = [NSMenu menuZone];
   NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
   NSMenuItem *menuItem;
   
-  menuItem = [menu addItemWithTitle:@"Start" action:@selector(startTimer:) keyEquivalent:@""];
+  menuItem = [menu addItemWithTitle:@"Start" action:@selector(play:) keyEquivalent:@""];
   [menuItem setTarget:self];
   
-  menuItem = [menu addItemWithTitle:@"Stop" action:@selector(stopTimer:) keyEquivalent:@""];
+  menuItem = [menu addItemWithTitle:@"Pause" action:@selector(playOrPause:) keyEquivalent:@""];
+  [menuItem setTarget:self];
+  
+  menuItem = [menu addItemWithTitle:@"Stop" action:@selector(stop:) keyEquivalent:@""];
+  [menuItem setTarget:self];
+  
+  menuItem = [menu addItemWithTitle:@"Previous" action:@selector(previous:) keyEquivalent:@""];
+  [menuItem setTarget:self];
+  
+  menuItem = [menu addItemWithTitle:@"Next" action:@selector(next:) keyEquivalent:@""];
   [menuItem setTarget:self];
   
   [menu addItem:[NSMenuItem separatorItem]];
@@ -144,25 +143,105 @@
   
   [_systemTray setMenu:menu];
   [_systemTray setHighlightMode:YES];
-  [_systemTray setToolTip:@"Work time counter"];
-  [_systemTray setTitle:@"☁☁"];
+  [_systemTray setToolTip:@"FooHttpController"];
+  [_systemTray setTitle:@"F"];
   
   [menu release];
 }
--(void)dealloc
-{
-  if (_timer != NULL) {
-    [_timer release];
-  }
-  
-  [_systemTray release];
-  [super dealloc];
-}
+
 - (void)quitApp:(id)sender {
   [NSApp terminate: sender];
 }
+-(void)deallocSystemTray
+{
+  [_systemTray release];
+}
 //end system tray
-    
+
+- (void)awakeFromNib {
+  [self awakeFromNibRegisterGlobalHotkeys];
+}
+
+//begin global hotkeys
+OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
+                         void *userData)
+{
+  
+  FooHttpControllerAppDelegate * mySelf = (FooHttpControllerAppDelegate *) userData;
+  
+  EventHotKeyID hkCom;
+  GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,
+                    sizeof(hkCom),NULL,&hkCom);
+  int l = hkCom.id;
+  
+  switch (l) {
+    case HOTKEY_PLAY:
+      NSLog(@"htk_play");
+      [mySelf play:(id)0];
+      break;
+    case HOTKEY_PAUSE:
+      NSLog(@"htk_pause");
+      [mySelf playOrPause:(id)0];
+      break;
+    case HOTKEY_STOP:
+      NSLog(@"htk_stop");
+      [mySelf stop:(id)0];
+      break;
+    case HOTKEY_PREVIOUS:
+      NSLog(@"htk_previous");
+      [mySelf previous:(id)0];
+      break;
+    case HOTKEY_NEXT:
+      NSLog(@"htk_next");
+      [mySelf next:(id)0];
+      break;
+  }
+  return noErr;
+}
+- (void)awakeFromNibRegisterGlobalHotkeys {
+  NSLog(@"awakeFromNib");
+  //Register the Hotkeys
+  EventHotKeyRef gMyHotKeyRef;
+  EventHotKeyID gMyHotKeyID;
+  EventTypeSpec eventType;
+  eventType.eventClass=kEventClassKeyboard;
+  eventType.eventKind=kEventHotKeyPressed;
+  InstallApplicationEventHandler(&MyHotKeyHandler,1,&eventType,(void *)self,NULL);
+  gMyHotKeyID.signature='htk1';
+  gMyHotKeyID.id=HOTKEY_PLAY;
+  RegisterEventHotKey(6, optionKey, gMyHotKeyID,
+                      GetApplicationEventTarget(), 0, &gMyHotKeyRef);
+  
+  gMyHotKeyID.signature='htk2';
+  gMyHotKeyID.id=HOTKEY_PAUSE;
+  RegisterEventHotKey(7, optionKey, gMyHotKeyID,
+                      GetApplicationEventTarget(), 0, &gMyHotKeyRef);
+  
+  gMyHotKeyID.signature='htk3';
+  gMyHotKeyID.id=HOTKEY_STOP;
+  RegisterEventHotKey(8, optionKey, gMyHotKeyID,
+                      GetApplicationEventTarget(), 0, &gMyHotKeyRef);
+  
+  gMyHotKeyID.signature='htk4';
+  gMyHotKeyID.id=HOTKEY_PREVIOUS;
+  RegisterEventHotKey(9, optionKey, gMyHotKeyID,
+                      GetApplicationEventTarget(), 0, &gMyHotKeyRef);
+  
+  gMyHotKeyID.signature='htk5';
+  gMyHotKeyID.id=HOTKEY_NEXT;
+  RegisterEventHotKey(11, optionKey, gMyHotKeyID,
+                      GetApplicationEventTarget(), 0, &gMyHotKeyRef);
+  
+}
+
+
+//end global hotkeys
+
+-(void)dealloc
+{
+  [self deallocSystemTray];
+  [super dealloc];
+}
 
 @end
 
@@ -172,5 +251,7 @@
  
   * rzepus - for SystemTray sample code
     http://blog.rzepus.pl/index.php/cocoa/traybar-status-bar-in-cocoa-nsstatusbar/
+  * dbacharach - for Global Hotkey sample code
+    http://dbachrach.com/blog/2005/11/program-global-hotkeys-in-cocoa-easily/
  
 */

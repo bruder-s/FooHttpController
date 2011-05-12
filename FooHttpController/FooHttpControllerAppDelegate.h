@@ -29,15 +29,22 @@
 //begin system tray
 - (void)start:(id)sender;
 - (void)stop:(id)sender;
-- (IBAction)updateTime:(id)sender;
+- (IBAction)updateTime:(id)theTimer;
 - (void) createMyTrayBar;
-- (void)dealloc;
+- (void)deallocSystemTray;
 - (void)quitApp:(id)sender;
 //end system tray
 
+//begin global hotkeys
+- (void)awakeFromNibRegisterGlobalHotkeys;
+//end global hotkeys
+
+- (void)awakeFromNib;
+
+- (void)dealloc;
 
 - (IBAction)play:(id)sender;
-- (IBAction)pauseOrPlay:(id)sender;
+- (IBAction)playOrPause:(id)sender;
 - (IBAction)stop:(id)sender;
 - (IBAction)previous:(id)sender;
 - (IBAction)next:(id)sender;
