@@ -26,4 +26,6 @@ IBOutlet NSTextField *lblLog;
 
 - (void)setLog:(NSString *)message;
 
+- (void)performAction:(NSString *)action;
+
 @end

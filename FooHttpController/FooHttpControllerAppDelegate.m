@@ -29,46 +29,75 @@
 - (IBAction)play:(id)sender
 {
     [self setLog:@"Received play event"];
+    [self performAction:@"Start"];
 }
 
 - (IBAction)pauseOrPlay:(id)sender
 {
     [self setLog:@"Received playOrPause event"];
+    [self performAction:@"Start"];
+
 }
 
 - (IBAction)stop:(id)sender
 {
     [self setLog:@"Received stop event"];
+    [self performAction:@"Stop"];
+
 }
 
 - (IBAction)next:(id)sender
 {
     [self setLog:@"Received next event"];
+    [self performAction:@"StartNext"];
+
 }
 
 - (IBAction)previous:(id)sender
 {
     [self setLog:@"Received previous event"];
+    [self performAction:@"StartPrevious"];
+
 }
 
-/*- (void)performAction
+- (void)performAction:(NSString*)action
 {
-    NSMutableData *receivedData;
     
-    // Create the request.
-    NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.apple.com/"]
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                          timeoutInterval:60.0];
-    // create the connection with the request
-    // and start loading the data
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        // Create the NSMutableData to hold the received data.
-        // receivedData is an instance variable declared elsewhere.
-        receivedData = [[NSMutableData data] retain];
-    } else {
-        // Inform the user that the connection failed.
-    }
-}*/
+    //NSString *URLString;
+	//NSStringEncoding encoding = NSUTF8StringEncoding;
+	//URLString = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)url, NULL, NULL, encoding);
+    
+    NSString *hostname=@"127.0.0.1";
+    NSString *port=@"8888";
+    NSString *template=@"default";
+    
+    NSMutableString *url=[NSMutableString stringWithCapacity:256];
+    [url appendString:@"http://"];
+    [url appendString:hostname];
+    [url appendString:@":"];
+    [url appendString:port];
+    [url appendString:@"/"];
+    [url appendString:template];
+    [url appendString:@"/?cmd="];
+    [url appendString:action];
+    [url appendString:@"&param1="];
+    
+	NSLog(@"%@", url);
+    
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: url]];
+	
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	
+	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	
+	if(response){
+		NSLog(@"Response: %@", response);
+	}
+	else{
+		NSLog(@"Error: %@", [error localizedDescription]);
+	}
+    
+}
 
 @end
