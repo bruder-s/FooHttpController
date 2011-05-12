@@ -9,14 +9,32 @@
 #import <Cocoa/Cocoa.h>
 
 @interface FooHttpControllerAppDelegate : NSObject <NSApplicationDelegate> {
-
-IBOutlet NSTextField *lblLog;
+  
+  //begin system tray
+  @private NSStatusItem *_systemTray;
+  @private NSTimer *_timer;   
+  @private NSDate *_startDate;
+  @private NSTimeInterval _timeInterval;
+  //end system tray
+  
+  IBOutlet NSTextField *lblLog;
     
-@private
+  @private
     NSWindow *window;
+  
 }
 
 @property (assign) IBOutlet NSWindow *window;
+
+//begin system tray
+- (void)start:(id)sender;
+- (void)stop:(id)sender;
+- (IBAction)updateTime:(id)sender;
+- (void) createMyTrayBar;
+- (void)dealloc;
+- (void)quitApp:(id)sender;
+//end system tray
+
 
 - (IBAction)play:(id)sender;
 - (IBAction)pauseOrPlay:(id)sender;

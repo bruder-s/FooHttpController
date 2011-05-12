@@ -14,7 +14,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self setLog:@"Initialized"];
+  //initialize your NSStatusBar
+  [self createMyTrayBar];
+  [self setLog:@"Initialized"];
 }
 
 - (void)setLog:(NSString *)message {
@@ -97,7 +99,78 @@
 	else{
 		NSLog(@"Error: %@", [error localizedDescription]);
 	}
-    
+  
 }
+  
+//begin system tray
+- (void)startTimer:(id)sender {
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+
+    [_timer fire];
+  }
+  
+- (void)stopTimer:(id)sender {
+    _timeInterval = [_startDate timeIntervalSinceNow];
+    [_timer invalidate];
+    [_timer release];
+  }
+  
+- (IBAction)updateTime:(id)sender {
+    
+    //refresh time count in NSStatusBar
+    //[_systemTray setTitle:[NSString stringWithFormat:@"%d:%d:%d", hours, minutes, seconds]];
+    [_systemTray setTitle:[NSString stringWithFormat:@"%d:%d:%d", 2, 3, 4]];
+  }
+
+- (void) createMyTrayBar  {
+  NSZone *menuZone = [NSMenu menuZone];
+  NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
+  NSMenuItem *menuItem;
+  
+  menuItem = [menu addItemWithTitle:@"Start" action:@selector(startTimer:) keyEquivalent:@""];
+  [menuItem setTarget:self];
+  
+  menuItem = [menu addItemWithTitle:@"Stop" action:@selector(stopTimer:) keyEquivalent:@""];
+  [menuItem setTarget:self];
+  
+  [menu addItem:[NSMenuItem separatorItem]];
+  
+  menuItem = [menu addItemWithTitle:@"Quit" action:@selector(quitApp:) keyEquivalent:@""];
+  [menuItem setTarget:self];
+  
+  _systemTray = [[[NSStatusBar systemStatusBar]
+                  statusItemWithLength:NSVariableStatusItemLength] retain];
+  
+  [_systemTray setMenu:menu];
+  [_systemTray setHighlightMode:YES];
+  [_systemTray setToolTip:@"Work time counter"];
+  [_systemTray setTitle:@"☁☁"];
+  
+  [menu release];
+}
+-(void)dealloc
+{
+  if (_timer != NULL) {
+    [_timer release];
+  }
+  
+  [_systemTray release];
+  [super dealloc];
+}
+- (void)quitApp:(id)sender {
+  [NSApp terminate: sender];
+}
+//end system tray
+    
 
 @end
+
+/*
+ 
+ Credits and thanks:
+ 
+  * rzepus - for SystemTray sample code
+    http://blog.rzepus.pl/index.php/cocoa/traybar-status-bar-in-cocoa-nsstatusbar/
+ 
+*/

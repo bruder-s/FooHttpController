@@ -441,6 +441,7 @@
 				0C52202F137BADE400B836A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C522030137BADE400B836A8 /* Build configuration list for PBXNativeTarget "FooHttpControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +450,7 @@
 				0C522032137BADE400B836A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
