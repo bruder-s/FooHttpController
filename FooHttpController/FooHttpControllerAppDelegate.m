@@ -124,11 +124,6 @@
 	}
   
 }
-  
-//begin system tray
-
-
-//end system tray
 
 - (void)awakeFromNib {
   [self awakeFromNibRegisterGlobalHotkeys];
