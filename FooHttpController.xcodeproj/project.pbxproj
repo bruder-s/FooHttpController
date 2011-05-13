@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C0A0F36137C864A003B49C9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C0A0F35137C864A003B49C9 /* Carbon.framework */; };
+		0C0A0F3D137CFF62003B49C9 /* SystemTray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0A0F3C137CFF62003B49C9 /* SystemTray.m */; };
+		0C0A0F3E137CFF62003B49C9 /* SystemTray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0A0F3C137CFF62003B49C9 /* SystemTray.m */; };
+		0C0A0F41137CFF75003B49C9 /* Hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0A0F40137CFF75003B49C9 /* Hotkeys.m */; };
+		0C0A0F42137CFF75003B49C9 /* Hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0A0F40137CFF75003B49C9 /* Hotkeys.m */; };
 		0C522000137BADE300B836A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C521FFF137BADE300B836A8 /* Cocoa.framework */; };
 		0C52200A137BADE300B836A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C522008137BADE300B836A8 /* InfoPlist.strings */; };
 		0C52200D137BADE300B836A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C52200C137BADE300B836A8 /* main.m */; };
@@ -32,6 +36,10 @@
 
 /* Begin PBXFileReference section */
 		0C0A0F35137C864A003B49C9 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		0C0A0F3B137CFF62003B49C9 /* SystemTray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemTray.h; sourceTree = "<group>"; };
+		0C0A0F3C137CFF62003B49C9 /* SystemTray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemTray.m; sourceTree = "<group>"; };
+		0C0A0F3F137CFF75003B49C9 /* Hotkeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hotkeys.h; sourceTree = "<group>"; };
+		0C0A0F40137CFF75003B49C9 /* Hotkeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hotkeys.m; sourceTree = "<group>"; };
 		0C521FFB137BADE300B836A8 /* FooHttpController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FooHttpController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C521FFF137BADE300B836A8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0C522002137BADE300B836A8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -120,6 +128,10 @@
 				0C522012137BADE300B836A8 /* FooHttpControllerAppDelegate.m */,
 				0C522014137BADE400B836A8 /* MainMenu.xib */,
 				0C522006137BADE300B836A8 /* Supporting Files */,
+				0C0A0F3B137CFF62003B49C9 /* SystemTray.h */,
+				0C0A0F3C137CFF62003B49C9 /* SystemTray.m */,
+				0C0A0F3F137CFF75003B49C9 /* Hotkeys.h */,
+				0C0A0F40137CFF75003B49C9 /* Hotkeys.m */,
 			);
 			path = FooHttpController;
 			sourceTree = "<group>";
@@ -263,6 +275,8 @@
 			files = (
 				0C52200D137BADE300B836A8 /* main.m in Sources */,
 				0C522013137BADE300B836A8 /* FooHttpControllerAppDelegate.m in Sources */,
+				0C0A0F3D137CFF62003B49C9 /* SystemTray.m in Sources */,
+				0C0A0F41137CFF75003B49C9 /* Hotkeys.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C52202A137BADE400B836A8 /* FooHttpControllerTests.m in Sources */,
+				0C0A0F3E137CFF62003B49C9 /* SystemTray.m in Sources */,
+				0C0A0F42137CFF75003B49C9 /* Hotkeys.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

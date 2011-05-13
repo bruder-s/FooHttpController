@@ -9,23 +9,40 @@
 #import "FooHttpControllerAppDelegate.h"
 //begin global hotkeys
 #import <Carbon/Carbon.h>
-//end global hotkeys
-
 #define HOTKEY_PLAY     1
 #define HOTKEY_PAUSE    2
 #define HOTKEY_STOP     3
 #define HOTKEY_PREVIOUS 4
 #define HOTKEY_NEXT     5
+//end global hotkeys
+
+#define kServerHostname @"serverHostname"
+#define kServerPort @"serverPort"
+#define kServerTemplate @"serverTemplate"
 
 @implementation FooHttpControllerAppDelegate
 
 @synthesize window;
 
++ (void)initialize {
+  [[NSUserDefaults standardUserDefaults] registerDefaults: 
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [NSString stringWithFormat:@"%@", @"127.0.0.1"], kServerHostname, 
+      [NSString stringWithFormat:@"%@", @"8888"], kServerPort, 
+      [NSString stringWithFormat:@"%@", @"default"], kServerTemplate, 
+      nil
+  ]];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  //initialize your NSStatusBar
-  [self createMyTrayBar];
+  
+  //initialize SystemTray
+  _mySystemTray=[SystemTray new];
+  [_mySystemTray createMyTrayBar:self];
+  
   [self setLog:@"Initialized"];
+  
 }
 
 - (void)setLog:(NSString *)message {
@@ -74,24 +91,21 @@
 - (void)performAction:(NSString*)action
 {
     
-    //NSString *URLString;
+  //NSString *URLString;
 	//NSStringEncoding encoding = NSUTF8StringEncoding;
 	//URLString = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)url, NULL, NULL, encoding);
     
-    NSString *hostname=@"127.0.0.1";
-    NSString *port=@"8888";
-    NSString *template=@"default";
-    
-    NSMutableString *url=[NSMutableString stringWithCapacity:256];
-    [url appendString:@"http://"];
-    [url appendString:hostname];
-    [url appendString:@":"];
-    [url appendString:port];
-    [url appendString:@"/"];
-    [url appendString:template];
-    [url appendString:@"/?cmd="];
-    [url appendString:action];
-    [url appendString:@"&param1="];
+  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+  NSMutableString *url=[NSMutableString stringWithCapacity:256];
+  [url appendString:@"http://"];
+  [url appendString:[ud stringForKey:kServerHostname]];
+  [url appendString:@":"];
+  [url appendString:[ud stringForKey:kServerPort]];
+  [url appendString:@"/"];
+  [url appendString:[ud stringForKey:kServerTemplate]];
+  [url appendString:@"/?cmd="];
+  [url appendString:action];
+  [url appendString:@"&param1="];
     
 	NSLog(@"%@", url);
     
@@ -113,49 +127,7 @@
   
 //begin system tray
 
-- (void) createMyTrayBar  {
-  NSZone *menuZone = [NSMenu menuZone];
-  NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
-  NSMenuItem *menuItem;
-  
-  menuItem = [menu addItemWithTitle:@"Start" action:@selector(play:) keyEquivalent:@""];
-  [menuItem setTarget:self];
-  
-  menuItem = [menu addItemWithTitle:@"Pause" action:@selector(playOrPause:) keyEquivalent:@""];
-  [menuItem setTarget:self];
-  
-  menuItem = [menu addItemWithTitle:@"Stop" action:@selector(stop:) keyEquivalent:@""];
-  [menuItem setTarget:self];
-  
-  menuItem = [menu addItemWithTitle:@"Previous" action:@selector(previous:) keyEquivalent:@""];
-  [menuItem setTarget:self];
-  
-  menuItem = [menu addItemWithTitle:@"Next" action:@selector(next:) keyEquivalent:@""];
-  [menuItem setTarget:self];
-  
-  [menu addItem:[NSMenuItem separatorItem]];
-  
-  menuItem = [menu addItemWithTitle:@"Quit" action:@selector(quitApp:) keyEquivalent:@""];
-  [menuItem setTarget:self];
-  
-  _systemTray = [[[NSStatusBar systemStatusBar]
-                  statusItemWithLength:NSVariableStatusItemLength] retain];
-  
-  [_systemTray setMenu:menu];
-  [_systemTray setHighlightMode:YES];
-  [_systemTray setToolTip:@"FooHttpController"];
-  [_systemTray setTitle:@"F"];
-  
-  [menu release];
-}
 
-- (void)quitApp:(id)sender {
-  [NSApp terminate: sender];
-}
--(void)deallocSystemTray
-{
-  [_systemTray release];
-}
 //end system tray
 
 - (void)awakeFromNib {
@@ -239,8 +211,12 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 
 -(void)dealloc
 {
-  [self deallocSystemTray];
+  
+  //SystemTray deallocation
+  [_mySystemTray dealloc];
+  
   [super dealloc];
+  
 }
 
 @end

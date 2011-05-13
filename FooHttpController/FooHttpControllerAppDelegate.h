@@ -7,14 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SystemTray.h"
 
 @interface FooHttpControllerAppDelegate : NSObject <NSApplicationDelegate> {
   
   //begin system tray
-  @private NSStatusItem *_systemTray;
-  @private NSTimer *_timer;   
-  @private NSDate *_startDate;
-  @private NSTimeInterval _timeInterval;
+  @private SystemTray *_mySystemTray;
   //end system tray
   
   IBOutlet NSTextField *lblLog;
@@ -26,18 +24,13 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
-//begin system tray
-- (void)createMyTrayBar;
-- (void)deallocSystemTray;
-- (void)quitApp:(id)sender;
-//end system tray
-
 //begin global hotkeys
 - (void)awakeFromNibRegisterGlobalHotkeys;
 //end global hotkeys
 
 - (void)awakeFromNib;
 
++ (void)initialize;
 - (void)dealloc;
 
 - (IBAction)play:(id)sender;
