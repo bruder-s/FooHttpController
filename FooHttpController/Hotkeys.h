@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface Hotkeys : NSObject {
     
 }
+
+- (void)awakeFromNibRegisterGlobalHotkeys:(NSObject *)main;
 
 @end

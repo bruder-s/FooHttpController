@@ -8,12 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SystemTray.h"
+#import "Hotkeys.h"
 
 @interface FooHttpControllerAppDelegate : NSObject <NSApplicationDelegate> {
   
   //begin system tray
-  @private SystemTray *_mySystemTray;
+  @private SystemTray *_systemTray;
   //end system tray
+  
+  //begin hotkeys
+  @private Hotkeys *_hotkeys;
+  //end hotkeys
   
   IBOutlet NSTextField *lblLog;
     
@@ -23,10 +28,6 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
-
-//begin global hotkeys
-- (void)awakeFromNibRegisterGlobalHotkeys;
-//end global hotkeys
 
 - (void)awakeFromNib;
 
