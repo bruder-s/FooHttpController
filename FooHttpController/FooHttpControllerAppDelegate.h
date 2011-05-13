@@ -27,10 +27,7 @@
 @property (assign) IBOutlet NSWindow *window;
 
 //begin system tray
-- (void)start:(id)sender;
-- (void)stop:(id)sender;
-- (IBAction)updateTime:(id)theTimer;
-- (void) createMyTrayBar;
+- (void)createMyTrayBar;
 - (void)deallocSystemTray;
 - (void)quitApp:(id)sender;
 //end system tray
