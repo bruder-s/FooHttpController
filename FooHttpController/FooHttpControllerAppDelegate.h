@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SystemTray.h"
-#import "Hotkeys.h"
+
+@class SystemTray;
+@class Hotkeys;
 
 @interface FooHttpControllerAppDelegate : NSObject <NSApplicationDelegate> {
   

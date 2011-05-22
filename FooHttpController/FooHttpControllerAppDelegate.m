@@ -8,6 +8,11 @@
 
 #import "FooHttpControllerAppDelegate.h"
 
+#import <Carbon/Carbon.h>
+
+#import "SystemTray.h"
+#import "Hotkeys.h"
+
 #define kServerHostname @"serverHostname"
 #define kServerPort @"serverPort"
 #define kServerTemplate @"serverTemplate"
@@ -19,9 +24,21 @@
 + (void)initialize {
   [[NSUserDefaults standardUserDefaults] registerDefaults: 
      [NSDictionary dictionaryWithObjectsAndKeys:
+      //Server
       [NSString stringWithFormat:@"%@", @"127.0.0.1"], kServerHostname, 
       [NSString stringWithFormat:@"%@", @"8888"], kServerPort, 
-      [NSString stringWithFormat:@"%@", @"default"], kServerTemplate, 
+      [NSString stringWithFormat:@"%@", @"default"], kServerTemplate,
+      //Hotkeys
+      [NSNumber numberWithInt:        6], kHotkeyPlay,
+      [NSNumber numberWithInt:optionKey], kHotkeyPlayModifiers,
+      [NSNumber numberWithInt:        7], kHotkeyPause,
+      [NSNumber numberWithInt:optionKey], kHotkeyPauseModifiers,
+      [NSNumber numberWithInt:        8], kHotkeyStop,
+      [NSNumber numberWithInt:optionKey], kHotkeyStopModifiers,
+      [NSNumber numberWithInt:        9], kHotkeyPrevious,
+      [NSNumber numberWithInt:optionKey], kHotkeyPreviousModifiers,
+      [NSNumber numberWithInt:       11], kHotkeyNext,
+      [NSNumber numberWithInt:optionKey], kHotkeyNextModifiers,
       nil
   ]];
 }

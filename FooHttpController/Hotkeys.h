@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+#define kHotkeyPlay @"hotkeyPlay"
+#define kHotkeyPlayModifiers @"hotkeyPlayModifiers"
+#define kHotkeyPause @"hotkeyPause"
+#define kHotkeyPauseModifiers @"hotkeyPauseModifiers"
+#define kHotkeyStop @"hotkeyStop"
+#define kHotkeyStopModifiers @"hotkeyStopModifiers"
+#define kHotkeyPrevious @"hotkeyPrevious"
+#define kHotkeyPreviousModifiers @"hotkeyPreviousModifiers"
+#define kHotkeyNext @"hotkeyNext"
+#define kHotkeyNextModifiers @"hotkeyNextModifiers"
+
 @interface Hotkeys : NSObject {
     
 }
