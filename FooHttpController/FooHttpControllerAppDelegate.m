@@ -12,6 +12,7 @@
 
 #import "SystemTray.h"
 #import "Hotkeys.h"
+#import "HotkeyTextView.h"
 
 #define kServerHostname @"serverHostname"
 #define kServerPort @"serverPort"
@@ -22,24 +23,51 @@
 @synthesize window;
 
 + (void)initialize {
+  
+  //where are the usedefaults stored?
+  //http://stackoverflow.com/questions/1676938/easy-way-to-see-saved-nsuserdefaults
+  NSArray *path = NSSearchPathForDirectoriesInDomains(
+    NSLibraryDirectory,
+    NSUserDomainMask,
+    YES
+  );
+  NSString *folder = [path objectAtIndex:0];
+  NSLog(@"Your NSUserDefaults are stored in this folder: %@/Preferences", folder);
+  
+  //set default values
   [[NSUserDefaults standardUserDefaults] registerDefaults: 
      [NSDictionary dictionaryWithObjectsAndKeys:
+      
       //Server
+      
       [NSString stringWithFormat:@"%@", @"127.0.0.1"], kServerHostname, 
       [NSString stringWithFormat:@"%@", @"8888"], kServerPort, 
       [NSString stringWithFormat:@"%@", @"default"], kServerTemplate,
+      
       //Hotkeys
-      [NSNumber numberWithInt:        6], kHotkeyPlay,
-      [NSNumber numberWithInt:optionKey], kHotkeyPlayModifiers,
-      [NSNumber numberWithInt:        7], kHotkeyPause,
-      [NSNumber numberWithInt:optionKey], kHotkeyPauseModifiers,
-      [NSNumber numberWithInt:        8], kHotkeyStop,
-      [NSNumber numberWithInt:optionKey], kHotkeyStopModifiers,
-      [NSNumber numberWithInt:        9], kHotkeyPrevious,
-      [NSNumber numberWithInt:optionKey], kHotkeyPreviousModifiers,
-      [NSNumber numberWithInt:       11], kHotkeyNext,
-      [NSNumber numberWithInt:optionKey], kHotkeyNextModifiers,
+      
+      [NSString stringWithFormat:@"%@", @"OPTION+Y"], kHotkeyPlayLabel,
+      [NSNumber numberWithInt:6], kHotkeyPlayKeyCode,
+      [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyPlayModifiers,
+      
+      [NSString stringWithFormat:@"%@", @"Option+X"], kHotkeyPauseLabel,
+      [NSNumber numberWithInt:7], kHotkeyPauseKeyCode,
+      [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyPauseModifiers,
+      
+      [NSString stringWithFormat:@"%@", @"Option+C"], kHotkeyStopLabel,
+      [NSNumber numberWithInt:8], kHotkeyStopKeyCode,
+      [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyStopModifiers,
+      
+      [NSString stringWithFormat:@"%@", @"Option+V"], kHotkeyPreviousLabel,
+      [NSNumber numberWithInt:9], kHotkeyPreviousKeyCode,
+      [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyPreviousModifiers,
+      
+      [NSString stringWithFormat:@"%@", @"Option+B"], kHotkeyNextLabel,
+      [NSNumber numberWithInt:11], kHotkeyNextKeyCode,
+      [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyNextModifiers,
+      
       nil
+      
   ]];
 }
 
@@ -49,6 +77,12 @@
   //initialize SystemTray
   _systemTray=[SystemTray new];
   [_systemTray createMyTrayBar:self];
+  
+  [hotkeyTextViewPlay setUserDefaultsKey:kHotkeyPlayLabel:kHotkeyPlayKeyCode:kHotkeyPlayModifiers];
+  [hotkeyTextViewPause setUserDefaultsKey:kHotkeyPauseLabel:kHotkeyPauseKeyCode:kHotkeyPauseModifiers];
+  [hotkeyTextViewStop setUserDefaultsKey:kHotkeyStopLabel:kHotkeyStopKeyCode:kHotkeyStopModifiers];
+  [hotkeyTextViewPrevious setUserDefaultsKey:kHotkeyPreviousLabel:kHotkeyPreviousKeyCode:kHotkeyPreviousModifiers];
+  [hotkeyTextViewNext setUserDefaultsKey:kHotkeyNextLabel:kHotkeyNextKeyCode:kHotkeyNextModifiers];
   
   [self setLog:@"Initialized"];
   
@@ -162,7 +196,7 @@
  
   * rzepus - for SystemTray sample code
     http://blog.rzepus.pl/index.php/cocoa/traybar-status-bar-in-cocoa-nsstatusbar/
-  * dbacharach - for Global Hotkey sample code
+  * Dustin Bacharach - for Global Hotkey sample code
     http://dbachrach.com/blog/2005/11/program-global-hotkeys-in-cocoa-easily/
  
 */

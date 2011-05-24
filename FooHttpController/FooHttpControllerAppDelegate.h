@@ -10,6 +10,7 @@
 
 @class SystemTray;
 @class Hotkeys;
+@class HotkeyTextView;
 
 @interface FooHttpControllerAppDelegate : NSObject <NSApplicationDelegate> {
   
@@ -22,7 +23,14 @@
   //end hotkeys
   
   IBOutlet NSTextField *lblLog;
-    
+  
+  //allows mapping the text fields to an action 
+  IBOutlet HotkeyTextView *hotkeyTextViewPlay;
+  IBOutlet HotkeyTextView *hotkeyTextViewPause;
+  IBOutlet HotkeyTextView *hotkeyTextViewStop;
+  IBOutlet HotkeyTextView *hotkeyTextViewPrevious;
+  IBOutlet HotkeyTextView *hotkeyTextViewNext;
+  
   @private
     NSWindow *window;
   
