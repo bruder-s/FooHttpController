@@ -31,12 +31,12 @@
   IBOutlet HotkeyTextView *hotkeyTextViewPrevious;
   IBOutlet HotkeyTextView *hotkeyTextViewNext;
   
-  @private
-    NSWindow *window;
+  @private NSWindow *_mainWindow;
   
 }
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSWindow *_mainWindow;
+
 
 - (void)awakeFromNib;
 
@@ -52,5 +52,7 @@
 - (void)setLog:(NSString *)message;
 
 - (void)performAction:(NSString *)action;
+
+- (void)reinitializeHotkeys;
 
 @end

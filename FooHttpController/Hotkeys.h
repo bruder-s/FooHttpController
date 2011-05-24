@@ -50,5 +50,6 @@
 }
 
 - (void)awakeFromNibRegisterGlobalHotkeys:(NSObject *)main;
+- (void)registerHotkeys;
 
 @end

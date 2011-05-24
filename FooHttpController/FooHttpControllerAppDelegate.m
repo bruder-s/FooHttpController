@@ -20,7 +20,7 @@
 
 @implementation FooHttpControllerAppDelegate
 
-@synthesize window;
+@synthesize _mainWindow;
 
 + (void)initialize {
   
@@ -176,6 +176,10 @@
   _hotkeys=[Hotkeys new];
   [_hotkeys awakeFromNibRegisterGlobalHotkeys:self];
   
+}
+
+- (void)reinitializeHotkeys {
+  [_hotkeys registerHotkeys];
 }
 
 -(void)dealloc
