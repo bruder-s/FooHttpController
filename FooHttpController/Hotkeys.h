@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Carbon/Carbon.h>
 
 #define kHotkeyPlayLabel @"hotkeyPlayLabel"
 #define kHotkeyPlayKeyCode @"hotkeyPlayKeyCode"
@@ -29,7 +30,23 @@
 #define kHotkeyNextModifiers @"hotkeyNextModifiers"
 
 @interface Hotkeys : NSObject {
-    
+  NSObject *_main;
+  
+  EventHotKeyRef _playHotKeyRef;
+  EventHotKeyID _playHotKeyID;
+  
+  EventHotKeyRef _pauseHotKeyRef;
+  EventHotKeyID _pauseHotKeyID;
+  
+  EventHotKeyRef _stopHotKeyRef;
+  EventHotKeyID _stopHotKeyID;
+  
+  EventHotKeyRef _previousHotKeyRef;
+  EventHotKeyID _previousHotKeyID;
+  
+  EventHotKeyRef _nextHotKeyRef;
+  EventHotKeyID _nextHotKeyID;
+  
 }
 
 - (void)awakeFromNibRegisterGlobalHotkeys:(NSObject *)main;

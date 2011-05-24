@@ -114,7 +114,7 @@
       [[NSUserDefaults standardUserDefaults] setValue:text forKey:_userDefaultsKey];
       _lastValidHotkey=[text mutableCopy];
       
-      /*switch ([characters characterAtIndex:0]) {
+      / *switch ([characters characterAtIndex:0]) {
         case NSUpArrowFunctionKey:
           NSLog(@"Key UP");
           break;
