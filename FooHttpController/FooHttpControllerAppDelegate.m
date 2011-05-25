@@ -13,6 +13,7 @@
 #import "SystemTray.h"
 #import "Hotkeys.h"
 #import "HotkeyTextView.h"
+#import "RegexKitLite.h"
 
 #define kServerHostname @"serverHostname"
 #define kServerPort @"serverPort"
@@ -131,13 +132,8 @@
 
 }
 
-- (void)performAction:(NSString*)action
-{
-    
-  //NSString *URLString;
-	//NSStringEncoding encoding = NSUTF8StringEncoding;
-	//URLString = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)url, NULL, NULL, encoding);
-    
+- (NSString*)getUrl:(NSString*)cmd:(NSString*)param1 {
+  
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   NSMutableString *url=[NSMutableString stringWithCapacity:256];
   [url appendString:@"http://"];
@@ -147,30 +143,114 @@
   [url appendString:@"/"];
   [url appendString:[ud stringForKey:kServerTemplate]];
   [url appendString:@"/?cmd="];
-  [url appendString:action];
+  [url appendString:cmd];
   [url appendString:@"&param1="];
+  [url appendString:param1];
+  
+  return [url autorelease];
+  
+}
+
+- (void)refreshPlayingInfo {
+  
+  NSString *url=[self getUrl:@"RefreshPlayingInfo":@""];
+  
+	//NSLog(@"%@", url);
+  
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: url]];
+	
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	
+	NSData *data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	
+	if (response) {
+		
+    //NSLog(@"Response: %@", response);
     
-	NSLog(@"%@", url);
+    //assume everything went ok
+    
+    if (data && [data length]>0) {
+      
+      NSString *textEncodingName=[response textEncodingName];
+      NSStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(
+        CFStringConvertIANACharSetNameToEncoding((CFStringRef)textEncodingName)
+                                                                            );
+      NSString* responseString = [[NSString alloc] initWithData:data encoding:encoding];
+      //NSLog(@"%@", responseString);
+      
+      NSString *regexString = @"<span id=\"track_title\" class=\"track\">([^<]*)</span>";
+      
+      NSString *matchedString = [responseString stringByMatching:regexString capture:1L];
+      
+      NSString *title;
+      
+      if ([matchedString length]>0) {
+        NSLog(@"%@", matchedString);
+        title=[[NSString alloc] initWithString:matchedString];
+      } else {
+        title=[[NSString alloc] initWithString:@"FooHttpController"];
+      }
+      
+      [_systemTray updateTrack:title];
+      [title release];
+      
+      [responseString release];
+    }
+    
+  } else {
+    
+    //NSLog(@"Error: %@", [error localizedDescription]);
+  
+  }
+  
+}
+
+- (void)performAction:(NSString*)action
+{
+    
+  //NSString *URLString;
+	//NSStringEncoding encoding = NSUTF8StringEncoding;
+	//URLString = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)url, NULL, NULL, encoding);
+    
+  NSString *url=[self getUrl:action:@""];
+    
+	//NSLog(@"%@", url);
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: url]];
 	
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	
-	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	NSData *data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	
-	if(response){
-		NSLog(@"Response: %@", response);
-	}
-	else{
+	if (response) {
+		
+    //NSLog(@"Response: %@", response);
+    
+    //assume everything went ok
+    
+    if (data && [data length]>0) {
+      
+      //wait some time (250ms) before asking for the playing info
+      [NSThread sleepForTimeInterval:0.25];
+      //usleep(250000);
+      
+      [self refreshPlayingInfo];
+      
+    }
+    
+	} else {
+    
 		NSLog(@"Error: %@", [error localizedDescription]);
-	}
+	
+  }
   
 }
 
 - (void)awakeFromNib {
   
-  NSLog(@"awakeFromNib");
+  //NSLog(@"awakeFromNib");
   
   //initialize hotkeys
   _hotkeys=[Hotkeys new];

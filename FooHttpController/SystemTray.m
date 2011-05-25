@@ -37,7 +37,7 @@
   [menuItem setTarget:self];
   
   _systemTray = [[[NSStatusBar systemStatusBar]
-                  statusItemWithLength:NSVariableStatusItemLength] retain];
+                  statusItemWithLength:NSSquareStatusItemLength] retain]; //NSVariableStatusItemLength
   
   [_systemTray setMenu:menu];
   [_systemTray setHighlightMode:YES];
@@ -45,6 +45,10 @@
   [_systemTray setTitle:@"F"];
   
   [menu release];
+}
+
+- (void) updateTrack:(NSString *)title {
+  [_systemTray setToolTip:title];
 }
 
 - (void)quitApp:(id)sender {

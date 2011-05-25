@@ -17,6 +17,7 @@
 
 - (void) dealloc;
 - (void) createMyTrayBar:(NSObject*)receiver;
+- (void) updateTrack:(NSString *)title;
 - (void) quitApp:(id)sender;
 
 @end

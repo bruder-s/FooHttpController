@@ -24,6 +24,7 @@
 		0C52202A137BADE400B836A8 /* FooHttpControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C522029137BADE400B836A8 /* FooHttpControllerTests.m */; };
 		0CBF0494138C3E2E0019FBC5 /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF0493138C3E2E0019FBC5 /* PreferencesWindow.m */; };
 		0CBF0497138C460B0019FBC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CBF0495138C460B0019FBC5 /* MainMenu.xib */; };
+		0CBF049A138C5B870019FBC5 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF0499138C5B870019FBC5 /* RegexKitLite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		0CBF0492138C3E2E0019FBC5 /* PreferencesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindow.h; sourceTree = "<group>"; };
 		0CBF0493138C3E2E0019FBC5 /* PreferencesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindow.m; sourceTree = "<group>"; };
 		0CBF0496138C460B0019FBC5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0CBF0498138C5B7D0019FBC5 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		0CBF0499138C5B870019FBC5 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 			children = (
 				0C522011137BADE300B836A8 /* FooHttpControllerAppDelegate.h */,
 				0C522012137BADE300B836A8 /* FooHttpControllerAppDelegate.m */,
+				0CBF0499138C5B870019FBC5 /* RegexKitLite.m */,
+				0CBF0498138C5B7D0019FBC5 /* RegexKitLite.h */,
 				0CBF0495138C460B0019FBC5 /* MainMenu.xib */,
 				0CBF0492138C3E2E0019FBC5 /* PreferencesWindow.h */,
 				0CBF0493138C3E2E0019FBC5 /* PreferencesWindow.m */,
@@ -289,6 +294,7 @@
 				0C0A0F41137CFF75003B49C9 /* Hotkeys.m in Sources */,
 				0C12165C13896FB60072C079 /* HotkeyTextView.m in Sources */,
 				0CBF0494138C3E2E0019FBC5 /* PreferencesWindow.m in Sources */,
+				0CBF049A138C5B870019FBC5 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +396,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FooHttpController/FooHttpController-Prefix.pch";
 				INFOPLIST_FILE = "FooHttpController/FooHttpController-Info.plist";
+				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -405,6 +412,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FooHttpController/FooHttpController-Prefix.pch";
 				INFOPLIST_FILE = "FooHttpController/FooHttpController-Info.plist";
+				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

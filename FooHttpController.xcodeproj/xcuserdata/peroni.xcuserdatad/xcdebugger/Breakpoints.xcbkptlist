@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FooHttpController/FooHttpControllerAppDelegate.m"
-         timestampString = "327880358.976081"
+         timestampString = "327966005.94654"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "-applicationDidFinishLaunching:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,12 +79,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FooHttpController/FooHttpControllerAppDelegate.m"
-         timestampString = "327960313.67219"
+         timestampString = "328038473.455774"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
+         startingLineNumber = "258"
+         endingLineNumber = "258"
          landmarkName = "-reinitializeHotkeys"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FooHttpController/FooHttpControllerAppDelegate.m"
+         timestampString = "328038473.455774"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
+         landmarkName = "-performAction:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
