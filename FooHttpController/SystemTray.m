@@ -12,6 +12,7 @@
 @implementation SystemTray
 
 - (void) createMyTrayBar:(NSObject*)receiver {
+  
   NSZone *menuZone = [NSMenu menuZone];
   NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
   NSMenuItem *menuItem;
@@ -44,6 +45,13 @@
   [_systemTray setToolTip:@"FooHttpController"];
   [_systemTray setTitle:@"F"];
   
+  NSBundle *bundle = [NSBundle mainBundle];
+  NSImage *statusImage=[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"icon" ofType:@"png"]];
+  NSSize s={16,16};
+  
+  [statusImage setSize:s];
+  [_systemTray setImage:statusImage];
+   
   [menu release];
 }
 
