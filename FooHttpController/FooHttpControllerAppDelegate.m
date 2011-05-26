@@ -100,34 +100,34 @@
 
 - (IBAction)play:(id)sender
 {
-    [self setLog:@"Received play event"];
+    //[self setLog:@"Received play event"];
     [self performAction:@"Start"];
 }
 
 - (IBAction)playOrPause:(id)sender
 {
-    [self setLog:@"Received playOrPause event"];
+    //[self setLog:@"Received playOrPause event"];
     [self performAction:@"PlayOrPause"];
 
 }
 
 - (IBAction)stop:(id)sender
 {
-    [self setLog:@"Received stop event"];
+    //[self setLog:@"Received stop event"];
     [self performAction:@"Stop"];
 
 }
 
 - (IBAction)next:(id)sender
 {
-    [self setLog:@"Received next event"];
+    //[self setLog:@"Received next event"];
     [self performAction:@"StartNext"];
 
 }
 
 - (IBAction)previous:(id)sender
 {
-    [self setLog:@"Received previous event"];
+    //[self setLog:@"Received previous event"];
     [self performAction:@"StartPrevious"];
 
 }
@@ -208,6 +208,8 @@
 
 - (void)performAction:(NSString*)action
 {
+  
+  [_systemTray animateStatusIcon];
     
   //NSString *URLString;
 	//NSStringEncoding encoding = NSUTF8StringEncoding;

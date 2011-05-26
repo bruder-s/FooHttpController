@@ -33,23 +33,23 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
   
   switch (l) {
     case HOTKEY_PLAY:
-      NSLog(@"htk_play");
+      //NSLog(@"htk_play");
       [mySelf play:(id)0];
       break;
     case HOTKEY_PAUSE:
-      NSLog(@"htk_pause");
+      //NSLog(@"htk_pause");
       [mySelf playOrPause:(id)0];
       break;
     case HOTKEY_STOP:
-      NSLog(@"htk_stop");
+      //NSLog(@"htk_stop");
       [mySelf stop:(id)0];
       break;
     case HOTKEY_PREVIOUS:
-      NSLog(@"htk_previous");
+      //NSLog(@"htk_previous");
       [mySelf previous:(id)0];
       break;
     case HOTKEY_NEXT:
-      NSLog(@"htk_next");
+      //NSLog(@"htk_next");
       [mySelf next:(id)0];
       break;
   }
@@ -174,79 +174,6 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
   //Register
   
   [self registerHotkeys];
-  
-  /*
-  
-  //Register the Hotkeys
-  EventHotKeyRef gMyHotKeyRef;
-  EventHotKeyID gMyHotKeyID;
-  EventTypeSpec eventType;
-  eventType.eventClass=kEventClassKeyboard;
-  eventType.eventKind=kEventHotKeyPressed;
-  InstallApplicationEventHandler(&MyHotKeyHandler,1,&eventType,(void *)main,NULL);
-  gMyHotKeyID.signature='htk1';
-  gMyHotKeyID.id=HOTKEY_PLAY;
-  
-  RegisterEventHotKey(
-    (UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyPlayKeyCode],
-    [self buildModifiersFromNSModifiers:(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyPlayModifiers]],
-    gMyHotKeyID,
-    GetApplicationEventTarget(),
-    0,
-    &gMyHotKeyRef
-  );
-  
-  gMyHotKeyID.signature='htk2';
-  gMyHotKeyID.id=HOTKEY_PAUSE;
-  UInt32 modifiers=(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyPauseModifiers];
-  
-  RegisterEventHotKey(
-    (UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyPauseKeyCode],
-    [self buildModifiersFromNSModifiers:(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyPauseModifiers]],
-    gMyHotKeyID,
-    GetApplicationEventTarget(), 
-    0,
-    &gMyHotKeyRef
-  );
-  
-  gMyHotKeyID.signature='htk3';
-  gMyHotKeyID.id=HOTKEY_STOP;
-  RegisterEventHotKey(
-    (UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyStopKeyCode],
-    [self buildModifiersFromNSModifiers:(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyStopModifiers]],
-    gMyHotKeyID,
-    GetApplicationEventTarget(),
-    0,
-    &gMyHotKeyRef
-  );
-  
-  gMyHotKeyID.signature='htk4';
-  gMyHotKeyID.id=HOTKEY_PREVIOUS;
-  RegisterEventHotKey(
-    (UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyPreviousKeyCode],
-    [self buildModifiersFromNSModifiers:(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyPreviousModifiers]],
-    gMyHotKeyID,
-    GetApplicationEventTarget(),
-    0,
-    &gMyHotKeyRef
-  );
-  
-  if (gMyHotKeyRef!=nil) {
-    
-  }
-  
-  gMyHotKeyID.signature='htk5';
-  gMyHotKeyID.id=HOTKEY_NEXT;
-  RegisterEventHotKey(
-    (UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyNextKeyCode],
-    [self buildModifiersFromNSModifiers:(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyNextModifiers]],
-    gMyHotKeyID,
-    GetApplicationEventTarget(),
-    0,
-    &gMyHotKeyRef
-  );
-   
-   */
   
 }
 

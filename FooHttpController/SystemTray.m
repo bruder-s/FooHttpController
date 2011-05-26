@@ -13,6 +13,9 @@
 
 - (void) createMyTrayBar:(NSObject*)receiver {
   
+  _reloadPlayingInfoTimer=nil;
+  _animationStep=-1;
+  
   NSZone *menuZone = [NSMenu menuZone];
   NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
   NSMenuItem *menuItem;
@@ -48,17 +51,64 @@
 
   //set the icon
   NSBundle *bundle = [NSBundle mainBundle];
-  NSString *iconPath=[bundle pathForResource:@"foobar2000" ofType:@"icns"];
-  NSImage *statusImage=[[NSImage alloc] initWithContentsOfFile:iconPath];
+  NSString *iconPath=[bundle pathForResource:@"status_item" ofType:@"png"];
+  _statusImage=[[NSImage alloc] initWithContentsOfFile:iconPath];
   NSSize s={16,16};
-  [statusImage setSize:s];
-  [_systemTray setImage:statusImage];
+  [_statusImage setSize:s];
+  [_systemTray setImage:_statusImage];
+  
+  //set the highlight icon
+  iconPath=[bundle pathForResource:@"status_item_highlight" ofType:@"png"];
+  _alternateStatusImage=[[NSImage alloc] initWithContentsOfFile:iconPath];
+  [_statusImage setSize:s];
+  [_systemTray setAlternateImage:_alternateStatusImage];
    
   [menu release];
+  
+}
+
+- (void)createAnimateStatusIconTimer {
+  
+  //NSLog(@"%d", _animationStep);
+  
+  [NSTimer
+    scheduledTimerWithTimeInterval:0.05
+    target:self
+    selector:@selector(fireAnimateStatusIconTimer:)
+    userInfo:nil
+    repeats:NO
+  ];
+  
+}
+
+- (void)fireAnimateStatusIconTimer:(NSTimer *)timer {
+  
+  //NSLog(@"TIMER %d %d", intNumber, intNumber % 2);
+  
+  if (_animationStep >= 0) {
+    if (_animationStep % 2==0) {
+      [_systemTray setImage:_statusImage];
+    } else {
+      [_systemTray setImage:_alternateStatusImage];
+    }
+    [self createAnimateStatusIconTimer];
+    _animationStep--;
+  }
+  
+  [timer invalidate];
+  timer = nil;
+    
 }
 
 - (void) updateTrack:(NSString *)title {
   [_systemTray setToolTip:title];
+}
+
+- (void) animateStatusIcon {
+  if (_animationStep==-1) {
+    _animationStep=4;
+    [self createAnimateStatusIconTimer];
+  }
 }
 
 - (void)quitApp:(id)sender {
@@ -68,6 +118,9 @@
 -(void)dealloc
 {
   [_systemTray release];
+  [_statusImage release];
+  [_alternateStatusImage release];
+  [super dealloc];
 }
 
 @end
