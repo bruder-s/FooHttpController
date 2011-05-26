@@ -100,8 +100,8 @@
 		0C521FF0137BADE300B836A8 = {
 			isa = PBXGroup;
 			children = (
-				0CBF049F138DA2390019FBC5 /* foobar2000.icns */,
 				0CBF04A3138E2E370019FBC5 /* status_item_highlight.png */,
+				0CBF049F138DA2390019FBC5 /* foobar2000.icns */,
 				0CBF04A4138E2E370019FBC5 /* status_item.png */,
 				0C0A0F35137C864A003B49C9 /* Carbon.framework */,
 				0C522005137BADE300B836A8 /* FooHttpController */,

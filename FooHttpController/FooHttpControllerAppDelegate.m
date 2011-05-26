@@ -147,7 +147,7 @@
   [url appendString:@"&param1="];
   [url appendString:param1];
   
-  return [url autorelease];
+  return url;
   
 }
 
