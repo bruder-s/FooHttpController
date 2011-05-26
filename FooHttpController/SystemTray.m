@@ -38,17 +38,19 @@
   [menuItem setTarget:self];
   
   _systemTray = [[[NSStatusBar systemStatusBar]
-                  statusItemWithLength:NSSquareStatusItemLength] retain]; //NSVariableStatusItemLength
+                  statusItemWithLength:NSVariableStatusItemLength] retain]; //NSSquareStatusItemLength
   
   [_systemTray setMenu:menu];
   [_systemTray setHighlightMode:YES];
   [_systemTray setToolTip:@"FooHttpController"];
-  [_systemTray setTitle:@"F"];
   
+  //[_systemTray setTitle:@"F"];
+
+  //set the icon
   NSBundle *bundle = [NSBundle mainBundle];
-  NSImage *statusImage=[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"icon" ofType:@"png"]];
+  NSString *iconPath=[bundle pathForResource:@"foobar2000" ofType:@"icns"];
+  NSImage *statusImage=[[NSImage alloc] initWithContentsOfFile:iconPath];
   NSSize s={16,16};
-  
   [statusImage setSize:s];
   [_systemTray setImage:statusImage];
    
