@@ -51,19 +51,19 @@
       [NSNumber numberWithInt:6], kHotkeyPlayKeyCode,
       [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyPlayModifiers,
       
-      [NSString stringWithFormat:@"%@", @"Option+X"], kHotkeyPauseLabel,
+      [NSString stringWithFormat:@"%@", @"OPTION+X"], kHotkeyPauseLabel,
       [NSNumber numberWithInt:7], kHotkeyPauseKeyCode,
       [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyPauseModifiers,
       
-      [NSString stringWithFormat:@"%@", @"Option+C"], kHotkeyStopLabel,
+      [NSString stringWithFormat:@"%@", @"OPTION+C"], kHotkeyStopLabel,
       [NSNumber numberWithInt:8], kHotkeyStopKeyCode,
       [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyStopModifiers,
       
-      [NSString stringWithFormat:@"%@", @"Option+V"], kHotkeyPreviousLabel,
+      [NSString stringWithFormat:@"%@", @"OPTION+V"], kHotkeyPreviousLabel,
       [NSNumber numberWithInt:9], kHotkeyPreviousKeyCode,
       [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyPreviousModifiers,
       
-      [NSString stringWithFormat:@"%@", @"Option+B"], kHotkeyNextLabel,
+      [NSString stringWithFormat:@"%@", @"OPTION+B"], kHotkeyNextLabel,
       [NSNumber numberWithInt:11], kHotkeyNextKeyCode,
       [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyNextModifiers,
       
