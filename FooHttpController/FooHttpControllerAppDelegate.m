@@ -14,6 +14,7 @@
 #import "Hotkeys.h"
 #import "HotkeyTextView.h"
 #import "RegexKitLite.h"
+#import "NotificationWindow.h"
 
 #define kServerHostname @"serverHostname"
 #define kServerPort @"serverPort"
@@ -25,7 +26,7 @@
 
 + (void)initialize {
   
-  //where are the usedefaults stored?
+  //where are the userdefaults stored?
   //http://stackoverflow.com/questions/1676938/easy-way-to-see-saved-nsuserdefaults
   NSArray *path = NSSearchPathForDirectoriesInDomains(
     NSLibraryDirectory,
@@ -70,6 +71,121 @@
       nil
       
   ]];
+  
+}
+
+- (BOOL) bringWindowWithNameToFront:(NSString *) windowName
+{
+  // Try to find a window named "windowName", and if found,
+  // bring it to the front
+  // Stephan Burlot 4/3/08
+  
+  CFArrayRef            windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
+  ProcessSerialNumber   myPSN = {kNoProcess, kNoProcess};
+  BOOL                  returnValue = FALSE;
+  
+  for (NSMutableDictionary *entry in (NSArray *)windowList) {
+    NSString *currentWindow = [entry objectForKey:(id)kCGWindowName];
+    NSLog(@"%@", currentWindow);
+    if ((currentWindow != NULL) && ([currentWindow isEqualToString:windowName]))
+    {
+      NSString *applicationName = [entry objectForKey:(id)kCGWindowOwnerName];
+      int pid = [[entry objectForKey:(id)kCGWindowOwnerPID] intValue];
+      GetProcessForPID(pid, &myPSN);
+      
+      NSString *script= [NSString stringWithFormat:@"tell application \"System Events\" to tell process \"%@\" to perform action \"AXRaise\" of window \"%@\"\ntell application \"%@\" to activate\n", applicationName, windowName, applicationName];
+      NSAppleScript *as = [[NSAppleScript alloc] initWithSource:script];
+      [as compileAndReturnError:NULL];
+      [as executeAndReturnError:NULL];  // Bring it on!
+      [as release];
+      returnValue = TRUE;
+    }
+  }
+  
+  CFRelease(windowList);
+  return returnValue;
+}
+
+-(void)fireTrackChangeDetectionTimer:(NSTimer *)timer {
+  
+  //NSLog(@"%@", @"fireTrackChangeDetectionTimer");
+  
+  NSString *windowName=nil;
+  NSString *track=nil;
+  BOOL foundSomething=NO;
+  CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
+  for (NSMutableDictionary* entry in (NSArray*)windowList) 
+  {
+    //NSString* ownerName = [entry objectForKey:(id)kCGWindowOwnerName];
+    //NSInteger ownerPID = [[entry objectForKey:(id)kCGWindowOwnerPID] integerValue];
+    if (!foundSomething) {
+      windowName = [entry objectForKey:(id)kCGWindowName];
+      if (windowName!=nil && [windowName length]>0) {
+        
+        //NSLog(@"%@", windowName);
+        
+        NSString *matchedStringStopped = [windowName stringByMatching:_regexStringFoobar2000Stopped capture:0L];
+        NSString *matchedStringWithTrack = [windowName stringByMatching:_regexStringFoobar2000WithTrack capture:1L];
+        
+        if ([matchedStringStopped length]>0) {
+          
+          //ignore
+          
+          //NSLog(@"%@", @"[Stopped]");
+          //track=[@"[Stopped]" mutableCopy];
+          //foundSomething=YES;
+          
+        } else if ([matchedStringWithTrack length]>0) {
+          
+          //NSLog(@"Track %@", matchedStringWithTrack);
+          track=[matchedStringWithTrack mutableCopy];
+          foundSomething=YES;
+          
+        } else {
+          
+          //NSLog(@"%@", @"not matched");
+          
+        }
+        
+      }
+    }
+    //NSLog(@"%@:%@:%ld", ownerName, windowName, ownerPID);
+  }
+  CFRelease(windowList);
+  
+  if (track!=nil) {
+    if (_currentPlayingTrack==nil) {
+      //first time init
+      _currentPlayingTrack=[track mutableCopy];
+    } else if ([_currentPlayingTrack isEqualToString:track]) {
+      //nothing changed - ignore
+    } else {
+      //track changed (or stopped)
+      [_currentPlayingTrack release];
+      _currentPlayingTrack=[track mutableCopy];
+      NSLog(@"Track change detected: '%@'", track);
+      [_lblTrack setStringValue:[track mutableCopy]];
+      [_lblTrackBackground setStringValue:[track mutableCopy]];
+      [_notificationWindow showNotification];
+    }
+    [track release];
+  }
+  
+}
+
+-(void)initializeTrackChangeDetection {
+  
+  _currentPlayingTrack=nil;
+  _regexStringFoobar2000Stopped = @"^foobar2000 v\\d+(.\\d+)*$";
+  _regexStringFoobar2000WithTrack = @"^(.*?)\\s*\\[foobar2000 v\\d+(.\\d+)*\\]$";
+  [NSTimer
+    scheduledTimerWithTimeInterval:1.0
+    target:self
+    selector:@selector(fireTrackChangeDetectionTimer:)
+    userInfo:nil
+    repeats:YES
+  ];
+  
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -84,6 +200,8 @@
   [hotkeyTextViewStop setUserDefaultsKey:kHotkeyStopLabel:kHotkeyStopKeyCode:kHotkeyStopModifiers];
   [hotkeyTextViewPrevious setUserDefaultsKey:kHotkeyPreviousLabel:kHotkeyPreviousKeyCode:kHotkeyPreviousModifiers];
   [hotkeyTextViewNext setUserDefaultsKey:kHotkeyNextLabel:kHotkeyNextKeyCode:kHotkeyNextModifiers];
+  
+  [self initializeTrackChangeDetection];
   
   [self setLog:@"Initialized"];
   
@@ -151,6 +269,7 @@
   
 }
 
+/*
 - (void)refreshPlayingInfo {
   
   NSString *url=[self getUrl:@"RefreshPlayingInfo":@""];
@@ -205,6 +324,7 @@
   }
   
 }
+*/
 
 - (void)performAction:(NSString*)action
 {
@@ -235,10 +355,13 @@
     if (data && [data length]>0) {
       
       //wait some time (250ms) before asking for the playing info
+      
+      /*
       [NSThread sleepForTimeInterval:0.25];
       //usleep(250000);
       
       [self refreshPlayingInfo];
+      */
       
     }
     

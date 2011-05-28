@@ -11,6 +11,7 @@
 @class SystemTray;
 @class Hotkeys;
 @class HotkeyTextView;
+@class NotificationWindow;
 
 @interface FooHttpControllerAppDelegate : NSObject <NSApplicationDelegate> {
   
@@ -22,6 +23,10 @@
   @private Hotkeys *_hotkeys;
   //end hotkeys
   
+  @private NSString *_currentPlayingTrack;
+  @private NSString *_regexStringFoobar2000Stopped;
+  @private NSString *_regexStringFoobar2000WithTrack;
+  
   IBOutlet NSTextField *lblLog;
   
   //allows mapping the text fields to an action 
@@ -32,6 +37,10 @@
   IBOutlet HotkeyTextView *hotkeyTextViewNext;
   
   @private NSWindow *_mainWindow;
+  
+  IBOutlet NotificationWindow *_notificationWindow;
+  IBOutlet NSTextField *_lblTrack;
+  IBOutlet NSTextField *_lblTrackBackground;
   
 }
 

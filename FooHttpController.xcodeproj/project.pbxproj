@@ -28,6 +28,7 @@
 		0CBF04A0138DA23A0019FBC5 /* foobar2000.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0CBF049F138DA2390019FBC5 /* foobar2000.icns */; };
 		0CBF04A5138E2E370019FBC5 /* status_item_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CBF04A3138E2E370019FBC5 /* status_item_highlight.png */; };
 		0CBF04A6138E2E370019FBC5 /* status_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CBF04A4138E2E370019FBC5 /* status_item.png */; };
+		0CBF04B91391A9D40019FBC5 /* NotificationWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF04B81391A9D40019FBC5 /* NotificationWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		0CBF049F138DA2390019FBC5 /* foobar2000.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = foobar2000.icns; sourceTree = "<group>"; };
 		0CBF04A3138E2E370019FBC5 /* status_item_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = status_item_highlight.png; path = FooHttpController/status_item_highlight.png; sourceTree = "<group>"; };
 		0CBF04A4138E2E370019FBC5 /* status_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = status_item.png; path = FooHttpController/status_item.png; sourceTree = "<group>"; };
+		0CBF04B71391A9D40019FBC5 /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationWindow.h; sourceTree = "<group>"; };
+		0CBF04B81391A9D40019FBC5 /* NotificationWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,8 @@
 				0C0A0F40137CFF75003B49C9 /* Hotkeys.m */,
 				0C12165A13896FB50072C079 /* HotkeyTextView.h */,
 				0C12165B13896FB50072C079 /* HotkeyTextView.m */,
+				0CBF04B71391A9D40019FBC5 /* NotificationWindow.h */,
+				0CBF04B81391A9D40019FBC5 /* NotificationWindow.m */,
 			);
 			path = FooHttpController;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 				0C12165C13896FB60072C079 /* HotkeyTextView.m in Sources */,
 				0CBF0494138C3E2E0019FBC5 /* PreferencesWindow.m in Sources */,
 				0CBF049A138C5B870019FBC5 /* RegexKitLite.m in Sources */,
+				0CBF04B91391A9D40019FBC5 /* NotificationWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
