@@ -29,6 +29,14 @@
 #define kHotkeyNextKeyCode @"hotkeyNextKeyCode"
 #define kHotkeyNextModifiers @"hotkeyNextModifiers"
 
+#define kHotkeyShowFoobarLabel @"hotkeyShowFoobarLabel"
+#define kHotkeyShowFoobarKeyCode @"hotkeyShowFoobarKeyCode"
+#define kHotkeyShowFoobarModifiers @"hotkeyShowFoobarModifiers"
+
+#define kHotkeyShowCurrentTrackLabel @"hotkeyShowCurrentTrackLabel"
+#define kHotkeyShowCurrentTrackKeyCode @"hotkeyShowCurrentTrackKeyCode"
+#define kHotkeyShowCurrentTrackModifiers @"hotkeyShowCurrentTrackModifiers"
+
 @interface Hotkeys : NSObject {
   NSObject *_main;
   
@@ -46,6 +54,12 @@
   
   EventHotKeyRef _nextHotKeyRef;
   EventHotKeyID _nextHotKeyID;
+  
+  EventHotKeyRef _showFoobarHotKeyRef;
+  EventHotKeyID _showFoobarHotKeyID;
+  
+  EventHotKeyRef _showCurrentTrackHotKeyRef;
+  EventHotKeyID _showCurrentTrackHotKeyID;
   
 }
 

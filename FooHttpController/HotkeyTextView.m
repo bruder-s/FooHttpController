@@ -94,7 +94,11 @@
 
 - (void)keyDown:(NSEvent *)pEvent
 {
-  //NSLog(@"hotkeyKeyDown");
+  NSLog(@"hotkeyKeyDown");
+  
+  _keyCode=[pEvent keyCode];
+  _key = [[pEvent charactersIgnoringModifiers] mutableCopy];
+  NSLog(@"Key '%@' #%d", _key, _keyCode);
   
   if (_hasModifiers) {
     

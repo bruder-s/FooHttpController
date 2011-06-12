@@ -12,11 +12,13 @@
 
 #import "FooHttpControllerAppDelegate.h"
 
-#define HOTKEY_PLAY     1
-#define HOTKEY_PAUSE    2
-#define HOTKEY_STOP     3
-#define HOTKEY_PREVIOUS 4
-#define HOTKEY_NEXT     5
+#define HOTKEY_PLAY                   1
+#define HOTKEY_PAUSE                  2
+#define HOTKEY_STOP                   3
+#define HOTKEY_PREVIOUS               4
+#define HOTKEY_NEXT                   5
+#define HOTKEY_SHOW_FOOBAR            6
+#define HOTKEY_SHOW_CURRENT_TRACK     7
 
 @implementation Hotkeys
 
@@ -24,7 +26,7 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
                          void *userData)
 {
   
-  FooHttpControllerAppDelegate * mySelf = (FooHttpControllerAppDelegate *) userData;
+  FooHttpControllerAppDelegate * fooHttpControllerAppDelegate = (FooHttpControllerAppDelegate *) userData;
   
   EventHotKeyID hkCom;
   GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,
@@ -34,23 +36,31 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
   switch (l) {
     case HOTKEY_PLAY:
       //NSLog(@"htk_play");
-      [mySelf play:(id)0];
+      [fooHttpControllerAppDelegate play:(id)0];
       break;
     case HOTKEY_PAUSE:
       //NSLog(@"htk_pause");
-      [mySelf playOrPause:(id)0];
+      [fooHttpControllerAppDelegate playOrPause:(id)0];
       break;
     case HOTKEY_STOP:
       //NSLog(@"htk_stop");
-      [mySelf stop:(id)0];
+      [fooHttpControllerAppDelegate stop:(id)0];
       break;
     case HOTKEY_PREVIOUS:
       //NSLog(@"htk_previous");
-      [mySelf previous:(id)0];
+      [fooHttpControllerAppDelegate previous:(id)0];
       break;
     case HOTKEY_NEXT:
       //NSLog(@"htk_next");
-      [mySelf next:(id)0];
+      [fooHttpControllerAppDelegate next:(id)0];
+      break;
+    case HOTKEY_SHOW_FOOBAR:
+      //NSLog(@"htk_showFoobar");
+      [fooHttpControllerAppDelegate showFoobar:(id)0];
+      break;
+    case HOTKEY_SHOW_CURRENT_TRACK:
+      //NSLog(@"htk_showCurrentTrack");
+      [fooHttpControllerAppDelegate showCurrentTrack:(id)0];
       break;
   }
   return noErr;
@@ -138,6 +148,32 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
     &_nextHotKeyRef
   );
   
+  if (_showFoobarHotKeyRef!=nil) {
+    UnregisterEventHotKey(_showFoobarHotKeyRef);
+  }
+  
+  RegisterEventHotKey(
+    (UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyShowFoobarKeyCode],
+    [self buildModifiersFromNSModifiers:(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyShowFoobarModifiers]],
+    _showFoobarHotKeyID,
+    GetApplicationEventTarget(),
+    0,
+    &_showFoobarHotKeyRef
+  );
+  
+  if (_showCurrentTrackHotKeyRef!=nil) {
+    UnregisterEventHotKey(_showCurrentTrackHotKeyRef);
+  }
+
+  RegisterEventHotKey(
+    (UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyShowCurrentTrackKeyCode],
+    [self buildModifiersFromNSModifiers:(UInt32)[[NSUserDefaults standardUserDefaults] integerForKey:kHotkeyShowCurrentTrackModifiers]],
+    _showCurrentTrackHotKeyID,
+    GetApplicationEventTarget(),
+    0,
+    &_showCurrentTrackHotKeyRef
+  );
+  
 }
 
 - (void)awakeFromNibRegisterGlobalHotkeys:(NSObject *)main {
@@ -165,6 +201,14 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
   _nextHotKeyRef=nil;
   _nextHotKeyID.signature='htk5';
   _nextHotKeyID.id=HOTKEY_NEXT;
+  
+  _showFoobarHotKeyRef=nil;
+  _showFoobarHotKeyID.signature='htk6';
+  _showFoobarHotKeyID.id=HOTKEY_SHOW_FOOBAR;
+  
+  _showCurrentTrackHotKeyRef=nil;
+  _showCurrentTrackHotKeyID.signature='htk7';
+  _showCurrentTrackHotKeyID.id=HOTKEY_SHOW_CURRENT_TRACK;
   
   EventTypeSpec eventType;
   eventType.eventClass=kEventClassKeyboard;

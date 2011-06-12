@@ -35,6 +35,8 @@
   IBOutlet HotkeyTextView *hotkeyTextViewStop;
   IBOutlet HotkeyTextView *hotkeyTextViewPrevious;
   IBOutlet HotkeyTextView *hotkeyTextViewNext;
+  IBOutlet HotkeyTextView *hotkeyTextViewShowFoobar;
+  IBOutlet HotkeyTextView *hotkeyTextViewShowCurrentTrack;
   
   @private NSWindow *_mainWindow;
   
@@ -57,6 +59,8 @@
 - (IBAction)stop:(id)sender;
 - (IBAction)previous:(id)sender;
 - (IBAction)next:(id)sender;
+- (IBAction)showFoobar:(id)sender;
+- (IBAction)showCurrentTrack:(id)sender;
 
 - (void)setLog:(NSString *)message;
 

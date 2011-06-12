@@ -68,6 +68,14 @@
       [NSNumber numberWithInt:11], kHotkeyNextKeyCode,
       [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyNextModifiers,
       
+      [NSString stringWithFormat:@"%@", @"OPTION+F"], kHotkeyShowFoobarLabel,
+      [NSNumber numberWithInt:3], kHotkeyShowFoobarKeyCode,
+      [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyShowFoobarModifiers,
+      
+      [NSString stringWithFormat:@"%@", @"OPTION+T"], kHotkeyShowCurrentTrackLabel,
+      [NSNumber numberWithInt:17], kHotkeyShowCurrentTrackKeyCode,
+      [NSNumber numberWithInt:NSAlternateKeyMask], kHotkeyShowCurrentTrackModifiers,
+      
       nil
       
   ]];
@@ -154,9 +162,13 @@
   CFRelease(windowList);
   
   if (track!=nil) {
+    BOOL showNotificationWindow=NO;
+    BOOL updateLabel=NO;
+    
     if (_currentPlayingTrack==nil) {
       //first time init
       _currentPlayingTrack=[track mutableCopy];
+      updateLabel=YES;
     } else if ([_currentPlayingTrack isEqualToString:track]) {
       //nothing changed - ignore
     } else {
@@ -164,8 +176,14 @@
       [_currentPlayingTrack release];
       _currentPlayingTrack=[track mutableCopy];
       NSLog(@"Track change detected: '%@'", track);
+      updateLabel=YES;
+      showNotificationWindow=YES;
+    }
+    if (updateLabel) {
       [_lblTrack setStringValue:[track mutableCopy]];
       [_lblTrackBackground setStringValue:[track mutableCopy]];
+    }
+    if (showNotificationWindow) {
       [_notificationWindow showNotification];
     }
     [track release];
@@ -200,6 +218,8 @@
   [hotkeyTextViewStop setUserDefaultsKey:kHotkeyStopLabel:kHotkeyStopKeyCode:kHotkeyStopModifiers];
   [hotkeyTextViewPrevious setUserDefaultsKey:kHotkeyPreviousLabel:kHotkeyPreviousKeyCode:kHotkeyPreviousModifiers];
   [hotkeyTextViewNext setUserDefaultsKey:kHotkeyNextLabel:kHotkeyNextKeyCode:kHotkeyNextModifiers];
+  [hotkeyTextViewShowFoobar setUserDefaultsKey:kHotkeyShowFoobarLabel:kHotkeyShowFoobarKeyCode:kHotkeyShowFoobarModifiers];
+  [hotkeyTextViewShowCurrentTrack setUserDefaultsKey:kHotkeyShowCurrentTrackLabel:kHotkeyShowCurrentTrackKeyCode:kHotkeyShowCurrentTrackModifiers];
   
   [self initializeTrackChangeDetection];
   
@@ -224,9 +244,11 @@
   }
 }
 
+
+
 - (IBAction)showFoobar:(id)sender
 {
-  NSLog(@"showFoobar");
+  //NSLog(@"showFoobar");
   NSString *windowName=nil;
   BOOL foundSomething=NO;
   CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
@@ -234,7 +256,6 @@
   {
     if (!foundSomething) {
       windowName = [entry objectForKey:(id)kCGWindowName];
-      //pid_t ownerPID_t=[entry objectForKey:(id)kCGWindowOwnerPID];
       NSInteger ownerPID = [[entry objectForKey:(id)kCGWindowOwnerPID] integerValue];
       pid_t ownerPID_t=(pid_t)ownerPID;
       
@@ -247,11 +268,17 @@
           [matchedStringStopped length]>0 ||
           [matchedStringWithTrack length]>0
         ) {
-          NSLog(@"showFoobar owner pid %ld", ownerPID);
+          
+          //NSLog(@"showFoobar owner pid %ld", ownerPID);
           //NSLog(@"showFoobar pid %ld", pID);
-          NSRunningApplication *runApp =  [NSRunningApplication runningApplicationWithProcessIdentifier: ownerPID_t];
-          NSLog(@"showFoobar app %ld", (void*)runApp);
-          [runApp activateWithOptions: NSApplicationActivateAllWindows];
+          NSRunningApplication *runApp = [NSRunningApplication runningApplicationWithProcessIdentifier: ownerPID_t];
+          //NSLog(@"showFoobar app %ld", (void*)runApp);
+          
+          //[runApp activateWithOptions: NSApplicationActivateAllWindows];
+          //this seems to work better than activateWithOptions...
+          [runApp hide];
+          [runApp unhide];
+          
         }
       }
     }
