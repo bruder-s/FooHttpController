@@ -39,13 +39,13 @@
   @private NSWindow *_mainWindow;
   
   IBOutlet NotificationWindow *_notificationWindow;
+  IBOutlet NSWindow *_preferencesWindow;
   IBOutlet NSTextField *_lblTrack;
   IBOutlet NSTextField *_lblTrackBackground;
   
 }
 
 @property (assign) IBOutlet NSWindow *_mainWindow;
-
 
 - (void)awakeFromNib;
 

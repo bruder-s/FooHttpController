@@ -216,6 +216,57 @@
     [lblLog setStringValue:log];
 }
 
+- (IBAction)showCurrentTrack:(id)sender
+{
+  //NSLog(@"showCurrentTrack");
+  if (![[_lblTrack stringValue] isEqualTo:@"Label"]) {
+    [_notificationWindow showNotification];
+  }
+}
+
+- (IBAction)showFoobar:(id)sender
+{
+  NSLog(@"showFoobar");
+  NSString *windowName=nil;
+  BOOL foundSomething=NO;
+  CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
+  for (NSMutableDictionary* entry in (NSArray*)windowList) 
+  {
+    if (!foundSomething) {
+      windowName = [entry objectForKey:(id)kCGWindowName];
+      //pid_t ownerPID_t=[entry objectForKey:(id)kCGWindowOwnerPID];
+      NSInteger ownerPID = [[entry objectForKey:(id)kCGWindowOwnerPID] integerValue];
+      pid_t ownerPID_t=(pid_t)ownerPID;
+      
+      if (windowName!=nil && [windowName length]>0) {
+        
+        NSString *matchedStringStopped = [windowName stringByMatching:_regexStringFoobar2000Stopped capture:0L];
+        NSString *matchedStringWithTrack = [windowName stringByMatching:_regexStringFoobar2000WithTrack capture:1L];
+        
+        if (
+          [matchedStringStopped length]>0 ||
+          [matchedStringWithTrack length]>0
+        ) {
+          NSLog(@"showFoobar owner pid %ld", ownerPID);
+          //NSLog(@"showFoobar pid %ld", pID);
+          NSRunningApplication *runApp =  [NSRunningApplication runningApplicationWithProcessIdentifier: ownerPID_t];
+          NSLog(@"showFoobar app %ld", (void*)runApp);
+          [runApp activateWithOptions: NSApplicationActivateAllWindows];
+        }
+      }
+    }
+    //NSLog(@"%@:%@:%ld", ownerName, windowName, ownerPID);
+  }
+  CFRelease(windowList);
+}
+
+- (IBAction)showPreferencesWindow:(id)sender
+{
+  NSLog(@"showPreferencesWindow");
+  [_preferencesWindow setLevel:NSFloatingWindowLevel];
+  [_preferencesWindow makeKeyAndOrderFront:self];
+}
+
 - (IBAction)play:(id)sender
 {
     //[self setLog:@"Received play event"];

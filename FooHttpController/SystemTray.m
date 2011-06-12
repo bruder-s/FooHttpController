@@ -36,9 +36,24 @@
   [menuItem setTarget:receiver];
   
   [menu addItem:[NSMenuItem separatorItem]];
+    
+  menuItem = [menu addItemWithTitle:@"Show Foobar" action:@selector(showFoobar:) keyEquivalent:@""];
+  [menuItem setTarget:receiver];
+    
+  menuItem = [menu addItemWithTitle:@"Show current track" action:@selector(showCurrentTrack:) keyEquivalent:@""];
+  [menuItem setTarget:receiver];
+  
+  [menu addItem:[NSMenuItem separatorItem]];
+  
+  menuItem = [menu addItemWithTitle:@"Preferences" action:@selector(showPreferencesWindow:) keyEquivalent:@""];
+  [menuItem setTarget:receiver];
+    
+  [menu addItem:[NSMenuItem separatorItem]];
   
   menuItem = [menu addItemWithTitle:@"Quit" action:@selector(quitApp:) keyEquivalent:@""];
   [menuItem setTarget:self];
+    
+  
   
   _systemTray = [[[NSStatusBar systemStatusBar]
                   statusItemWithLength:NSVariableStatusItemLength] retain]; //NSSquareStatusItemLength
